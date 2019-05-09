@@ -1,0 +1,38 @@
+plugins {
+    id 'java'
+}
+
+sourceCompatibility = '1.11'
+targetCompatibility = '1.11'
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src']
+        }
+        resources {
+            srcDirs = ['resources']
+        }
+    }
+}
+
+jar {
+  manifest {
+    attributes(
+      'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+      'Main-Class': 'hu.gyengus.smarthome.alarm.App'
+    )
+  }
+}
+
+task runOnWindows(type: Exec, group: "Custom", description: "Run the applciation on Windows") {
+  dependsOn jar
+  workingDir '.'
+  commandLine 'java', '-jar', 'build\\libs\\alarm-service.jar'
+}
+
+task runOnLinux(type: Exec, group: "Custom", description: "Run the applciation on Linux") {
+  dependsOn jar
+  workingDir '.'
+  commandLine 'java -jar ./build/libs/alarm-service.jar'
+}
