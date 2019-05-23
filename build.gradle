@@ -3,7 +3,6 @@ plugins {
     id "org.sonarqube" version "2.7"
 }
 
-
 apply plugin: "jacoco"
 
 sourceCompatibility = '1.11'
@@ -74,10 +73,9 @@ sonarqube {
     }
 }
 
-
-
 jacocoTestReport {
     reports {
         xml.enabled true
+        html.enabled = true
     }
 }
