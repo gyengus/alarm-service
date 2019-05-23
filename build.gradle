@@ -9,12 +9,25 @@ targetCompatibility = '1.11'
 sourceSets {
     main {
         java {
-            srcDirs = ['src']
+            srcDirs = ['src/main']
         }
         resources {
             srcDirs = ['resources']
         }
     }
+    test {
+        java {
+            srcDirs = ['src/test']
+        }
+    }
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	testImplementation('org.junit.jupiter:junit-jupiter:5.4.2')
 }
 
 jar {
@@ -24,6 +37,10 @@ jar {
       'Main-Class': 'hu.gyengus.smarthome.alarm.App'
     )
   }
+}
+
+test {
+    useJUnitPlatform()
 }
 
 task runOnWindows(type: Exec, group: "Custom", description: "Run the applciation on Windows") {
@@ -36,4 +53,15 @@ task runOnLinux(type: Exec, group: "Custom", description: "Run the applciation o
   dependsOn jar
   workingDir '.'
   commandLine 'java -jar ./build/libs/alarm-service.jar'
+}
+
+sonarqube {
+    properties {
+        property "sonar.host.url", "https://sonarcloud.io"
+        property "sonar.projectKey", "gyengus_alarm-service"
+        property "sonar.organization", "gyengus-github"
+        property "sonar.sources", "src/main"
+        property "sonar.tests", "src/test"
+        property "sonar.junit.reportPaths", ".\\build\\test-results\\test"
+    }
 }
