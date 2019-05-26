@@ -1,0 +1,8 @@
+stages:
+  - test
+
+test:
+  stage: test
+  image: openjdk:11-alpine
+  script:
+    - ./gradlew sonarqube -Dsonar.login=$SONARCLOUD_LOGIN
