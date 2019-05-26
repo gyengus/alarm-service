@@ -1,3 +1,5 @@
+import org.apache.tools.ant.taskdefs.condition.Os
+
 plugins {
     id 'java'
     id "org.sonarqube" version "2.7"
@@ -45,16 +47,18 @@ test {
     useJUnitPlatform()
 }
 
-task runOnWindows(type: Exec, group: "Custom", description: "Run the applciation on Windows") {
-  dependsOn jar
-  workingDir '.'
-  commandLine 'java', '-jar', 'build\\libs\\alarm-service.jar'
+String runCommandParameter() {
+    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+        return 'build\\libs\\alarm-service.jar'
+    } else {
+        return './build/libs/alarm-service.jar'
+    }
 }
 
-task runOnLinux(type: Exec, group: "Custom", description: "Run the applciation on Linux") {
+task run(type: Exec, group: "Custom", description: "Run the applciation") {
   dependsOn jar
   workingDir '.'
-  commandLine 'java -jar ./build/libs/alarm-service.jar'
+  commandLine 'java', '-jar', runCommandParameter()
 }
 
 project.tasks["jacocoTestReport"].dependsOn "build"
