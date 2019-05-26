@@ -7,24 +7,27 @@ import java.io.PrintStream;
 
 import org.junit.jupiter.api.Test;
 
-class AppTests {
+/**
+ * Tests for App class.
+ */
+public class AppTests {
 
+    /**
+     * Check hu.gyengus.smarthome.alarm.App is exists.
+     */
     @Test
-    void testAppClassIsExists() {
+    public void testAppClassIsExists() {
         assertEquals("hu.gyengus.smarthome.alarm.App", App.class.getName());
     }
 
+    /**
+     * Testing main method.
+     */
     @Test
-    void testAppClass() {
-        App app = new App();
-        assertEquals("hu.gyengus.smarthome.alarm.App", app.getClass().getName());
-    }
-
-    @Test
-    void testMain() {
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    public void testMain() {
+        final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
-        App.main(null);
+        App.main(new String[0]);
         assertEquals("Hello from alarm-service" + System.lineSeparator(), outContent.toString());
     }
 

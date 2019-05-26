@@ -1,16 +1,17 @@
 package hu.gyengus.smarthome.alarm;
 
 /**
- * Run class
+ * Run class.
  */
-public class App {
+public final class App {
+
+    private App() {};
 
     /**
-     * Entrypoint
+     * Application entry point.
      * @param args not used
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         System.out.println("Hello from alarm-service");
     }
-
 }
