@@ -20,6 +20,3 @@ test:
     - pwd
   script:
     - ./gradlew sonarqube -Dsonar.login=$SONARCLOUD_LOGIN -Dsonar.projectVersion=$CI_COMMIT_SHORT_SHA
-  after_script:
-    - echo $HOME
-    - ls -la $HOME
