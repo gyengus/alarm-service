@@ -1,10 +1,13 @@
 stages:
   - test
 
+before_script:
+  - export GRADLE_USER_HOME=`pwd`/gradle_home
+
 cache:
   paths:
      - .gradle
-     - $HOME/.gradle
+     - $GRADLE_USER_HOME
 
 test:
   stage: test
@@ -18,4 +21,4 @@ test:
   script:
     - ./gradlew sonarqube -Dsonar.login=$SONARCLOUD_LOGIN -Dsonar.projectVersion=$CI_COMMIT_SHORT_SHA
   after_script:
-    - ls -la $HOME/.gradle
+    - ls -la $GRADLE_USER_HOME
