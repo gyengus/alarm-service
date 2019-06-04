@@ -1,13 +1,10 @@
 stages:
   - test
 
-before_script:
-    - export GRADLE_USER_HOME=`pwd`/.gradle
-
 cache:
   paths:
      - .gradle
-     - build
+     - $HOME/.gradle
 
 test:
   stage: test
