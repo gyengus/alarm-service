@@ -1,0 +1,20 @@
+stages:
+  - test
+
+cache:
+  paths:
+     - .gradle
+     - $GRADLE_USER_HOME
+
+test:
+  stage: test
+  image: openjdk:11
+  artifacts:
+    paths:
+      - build/libs/alarm-service.jar
+  before_script:
+    - java --version
+    - pwd
+    - echo $GRADLE_USER_HOME
+  script:
+    - ./gradlew sonarqube -Dsonar.login=$SONARCLOUD_LOGIN -Dsonar.projectVersion=$CI_COMMIT_SHORT_SHA
