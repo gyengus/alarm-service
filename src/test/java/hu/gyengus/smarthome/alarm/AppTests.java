@@ -6,10 +6,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 /**
  * Tests for App class.
  */
+@SpringBootTest
 public class AppTests {
 
     /**
