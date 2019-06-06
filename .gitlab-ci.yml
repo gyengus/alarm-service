@@ -11,7 +11,7 @@ test:
   image: openjdk:11
   artifacts:
     paths:
-      - build/libs/alarm-service.jar
+      - build/libs/*.jar
   before_script:
     - java --version
     - pwd
